@@ -8,8 +8,11 @@ const FlashcardView = () => {
 
     useEffect(() => {
         axios
-            .get(`${process.env.FLASH_CARD_SERVER}/flashcards`)
-            .then((res) => setFlashcards(res.data))
+            .get(`${process.env.REACT_APP_API_URL}/flashcards`)
+            .then((res) => {
+                setFlashcards(res.data);
+                console.log(res);
+            })
             .catch((err) => console.error(err));
     }, []);
 

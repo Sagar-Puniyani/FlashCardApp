@@ -7,21 +7,24 @@ const AdminDashboard = () => {
 
     useEffect(() => {
         axios
-            .get(`${process.env.FLASH_CARD_SERVER}/flashcards`)
+            .get(`${process.env.REACT_APP_API_URL}/flashcards`)
             .then((res) => setFlashcards(res.data))
-            .catch((err) => console.error(err));
+            .catch((err) => {
+                console.error(err);
+                console.log(` Route :  ${process.env.REACT_APP_API_URL}/flashcards`);
+            });
     }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (form.id) {
             axios
-                .put(`${process.env.FLASH_CARD_SERVER}/flashcards/${form.id}`, form)
+                .put(`${process.env.REACT_APP_API_URL}/flashcards/${form.id}`, form)
                 .then(() => setForm({ question: "", answer: "", id: null }))
                 .then(() => fetchFlashcards());
         } else {
             axios
-                .post(`${process.env.FLASH_CARD_SERVER}/flashcards`, form)
+                .post(`${process.env.REACT_APP_API_URL}/flashcards`, form)
                 .then(() => setForm({ question: "", answer: "" }))
                 .then(() => fetchFlashcards());
         }
@@ -33,13 +36,13 @@ const AdminDashboard = () => {
 
     const handleDelete = (id) => {
         axios
-            .delete(`${process.env.FLASH_CARD_SERVER}/flashcards/${id}`)
+            .delete(`${process.env.REACT_APP_API_URL}/flashcards/${id}`)
             .then(() => fetchFlashcards());
     };
 
     const fetchFlashcards = () => {
         axios
-            .get(`${process.env.FLASH_CARD_SERVER}/flashcards`)
+            .get(`${process.env.REACT_APP_API_URL}/flashcards`)
             .then((res) => setFlashcards(res.data))
             .catch((err) => console.error(err));
     };
