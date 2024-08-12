@@ -68,7 +68,7 @@ const AdminDashboard = () => {
             </form>
 
             <ul>
-                {flashcards.map((flashcard) => (
+                {flashcards && flashcards.map((flashcard) => (
                     <li key={flashcard.id}>
                         <p>
                             {flashcard.question} - {flashcard.answer}
